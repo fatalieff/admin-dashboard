@@ -1,0 +1,35 @@
+@import "tailwindcss";
+/* index.css (və ya global stil faylınızda) */
+
+/* Dark Mod üçün Table Stilini Hədəfləyirik */
+.ant-table-wrapper {
+  color: var(--text-color); /* Mətn rəngi */
+}
+
+/* Table Body Sətirləri */
+.ant-table-wrapper .dark-table-row > td {
+  background-color: #1e293b !important; /* Row fonu */
+  border-bottom: 1px solid #334155 !important; /* Sətirlər arasındakı xətt */
+  color: #f8fafc !important; /* Sətir mətn rəngi */
+}
+
+/* Hover Stili */
+.ant-table-wrapper .dark-table-row:hover > td {
+  background-color: #334155 !important; 
+}
+
+/* AntD Pagination (Səhifələmə) Elementlərini də Tündləşdirin */
+.ant-pagination-item-link,
+.ant-pagination-item {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+  color: #f8fafc !important;
+}
+
+.ant-pagination-item-active {
+  border-color: #3b82f6 !important;
+}
+
+.ant-pagination-item-link .anticon {
+  color: #f8fafc !important;
+}
