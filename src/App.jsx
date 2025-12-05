@@ -1,8 +1,8 @@
 import "./App.css";
-import MainLayout from "./Layout/MainLayout";
-import Dashboard from "./Pages/Dashboard";
-import Posts from "./pages/Posts";
-import Users from "./Pages/Users";
+import MainLayout from "./Layout/MainLayout.jsx";
+import Dashboard from "./Pages/Dashboard.jsx";
+import Posts from "./pages/Posts.jsx";
+import Users from "./Pages/Users.jsx";
 import { BrowserRouter ,Routes , Route } from "react-router-dom";
 function App() {
   return (
