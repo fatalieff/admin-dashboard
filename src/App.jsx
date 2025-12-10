@@ -1,7 +1,7 @@
 import "./App.css";
 import MainLayout from "./Layout/MainLayout.jsx";
 import Dashboard from "./Pages/Dashboard.jsx";
-import Posts from "./pages/Posts.jsx";
+import Posts from "./Pages/Posts.jsx";
 import LoginPage from "./Pages/Login.jsx";
 import { isAuthenticated } from "./Services/auth.js";
 import Users from "./Pages/Users.jsx";
