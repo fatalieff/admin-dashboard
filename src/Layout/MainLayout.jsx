@@ -150,7 +150,7 @@ function MainLayout() {
           className="flex justify-between"
         >
           <h1
-            className="text-[30px] text-center text-[#000] font-bold "
+            className=" text-center text-[#000] font-bold sm:text-[15px] md:text-[25px] lg:text-[30px]  "
             style={{ color: colors.textColor, ...transitionStyle }}
           >
             Admin Dashboard
