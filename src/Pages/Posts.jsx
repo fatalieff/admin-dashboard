@@ -3,7 +3,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import PostModal from "../Posts/PostModal";
 import PostTable from "../Posts/PostTable";
-import { getPosts, createPost, updatePost, deletePost } from "../services/api";
+import { getPosts, createPost, updatePost, deletePost } from "../Services/api";
 function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createUser, deleteUser, getUsers, updateUser } from "../services/api";
+import { createUser, deleteUser, getUsers, updateUser } from "../Services/api";
 import { message } from "antd";
 import { Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
