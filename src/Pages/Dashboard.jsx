@@ -38,8 +38,8 @@ function Dashboard() {
   const transitionStyle = { transition: "background-color 0.5s ease-in-out" };
   return (
     <div style={{ color: colors.textColor, ...transitionStyle }}>
-      <Row gutter={16}>
-        <Col span={12}>
+      <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
+        <Col xs={24} sm={24} md={12} lg={12}>
           <Card
             style={{
               backgroundColor: colors.cardBg,
@@ -56,7 +56,7 @@ function Dashboard() {
           </Card>
         </Col>
 
-        <Col span={12}>
+        <Col xs={24} sm={24} md={12} lg={12}>
           <Card
             style={{
               backgroundColor: colors.cardBg,
@@ -74,8 +74,8 @@ function Dashboard() {
         </Col>
       </Row>
 
-      <Row gutter={16} style={{ marginTop: "20px" }}>
-        <Col span={12}>
+      <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
+        <Col xs={24} sm={24} md={12} lg={12}>
           <Card
             title={
               <span style={{ color: colors.textColor }}>Users Activity</span>
@@ -89,7 +89,7 @@ function Dashboard() {
             <LineCharts />
           </Card>
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={24} md={12} lg={12}>
           <Card
             title={<span style={{ color: colors.textColor }}>Pie Chart </span>}
             bordered={false}

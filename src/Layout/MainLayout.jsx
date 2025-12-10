@@ -9,7 +9,7 @@ import {
   DashboardOutlined,
   LoginOutlined,
   LogoutOutlined,
-  DownOutlined,
+  MenuOutlined
 } from "@ant-design/icons";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 
@@ -157,9 +157,7 @@ function MainLayout() {
           </h1>
           <Dropdown menu={{ items: dropdownItems }} placement="bottomRight">
             <Space style={{ cursor: "pointer" }}>
-              <span className="text-[16px] font-[600] " style={{color:colors.textColor , ...transitionStyle}}>
-                User <DownOutlined />
-              </span>
+              <span style={{fontSize:`25px` , color: colors.textColor }} ><MenuOutlined/></span>
             </Space>
           </Dropdown>
         </Header>
