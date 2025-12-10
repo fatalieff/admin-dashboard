@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Col, Row, Statistic } from "antd";
 import { UserOutlined, FileTextOutlined } from "@ant-design/icons";
-import { getUsers, getPosts } from "../services/api";
+import { getUsers, getPosts } from "../Services/api";
 import LineCharts from "../Components/Charts/LineChart";
 import { Line } from "recharts";
 import PieChartExample from "../Components/Charts/PieCharts";
