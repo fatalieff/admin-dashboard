@@ -1,23 +1,28 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Dropdown, Space } from "antd";
 import React from "react";
+import { logout } from "../Services/auth";
 import { useTheme } from "../contexts/ThemeContext";
 import ThemeSwitch from "../Components/ThemeSwitch";
 import {
   UserOutlined,
   FileTextOutlined,
   DashboardOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  DownOutlined,
 } from "@ant-design/icons";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 
 function MainLayout() {
   const { theme } = useTheme();
-
+  const navigate = useNavigate();
   const isDark = theme === "dark";
   const transitionStyle = {
     transition: "background-color 0.5s ease, color 0.5s ease",
   };
+  //Theme Colors
   const colors = {
     siderBg: isDark ? "#001529" : "#fff",
     headerBg: isDark ? "#001529" : "#fff",
@@ -27,7 +32,43 @@ function MainLayout() {
     headerTitleColor: isDark ? "#f8fafc" : "#000000",
     appLayoutBg: isDark ? "#0f172a" : "#f0f4f8",
   };
+  //Logout Function
+  function handleLogout() {
+    logout();
+    navigate("/login");
+  }
+  //Droptown Items
+  const dropdownItems = [
+    {
+      key: "profile",
+      icon: <UserOutlined />,
+      label: "Profile",
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: "Logout",
+      danger: true,
+      onClick: handleLogout,
+    },
+    {
+      key: "theme_switch",
+      label: (
+        <div style={{ padding: "8px 12px" }}>
+          <Space>
+            <span>Theme:</span>
+            <ThemeSwitch />
+          </Space>
+        </div>
+      ),
+      disabled: true,
+    },
+  ];
 
+  //Sider Meni Items
   const menuItems = [
     {
       key: "1",
@@ -105,7 +146,7 @@ function MainLayout() {
       </Sider>
       <Layout>
         <Header
-          style={{ background: colors.headerBg, ...transitionStyle, }}
+          style={{ background: colors.headerBg, ...transitionStyle }}
           className="flex justify-between"
         >
           <h1
@@ -114,14 +155,20 @@ function MainLayout() {
           >
             Admin Dashboard
           </h1>
-          <ThemeSwitch />
+          <Dropdown menu={{ items: dropdownItems }} placement="bottomRight">
+            <Space style={{ cursor: "pointer" }}>
+              <span className="text-[16px] font-[600] " style={{color:colors.textColor , ...transitionStyle}}>
+                User <DownOutlined />
+              </span>
+            </Space>
+          </Dropdown>
         </Header>
 
         <Content
           style={{
             margin: "24px 16px",
             padding: "24px",
-            borderRadius:`15px`,
+            borderRadius: `15px`,
             background: colors.contentBg,
             ...transitionStyle,
             color: colors.textColor,
