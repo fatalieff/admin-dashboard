@@ -66,7 +66,7 @@ function PostTable({ posts, loading, onEdit, onDelete }) {
             okText="Delete"
             cancelText="Cancel"
           >
-            <Button danger icon={<DeleteOutlined />} size="small">
+            <Button danger icon={<DeleteOutlined />} size="small" variant="solid" color="red">
               Delete
             </Button>
           </Popconfirm>
