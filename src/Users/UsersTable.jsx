@@ -1,14 +1,16 @@
 import React from "react";
-import {
+import Icon, {
   EditOutlined,
   DeleteOutlined,
   SearchOutlined,
   UploadOutlined,
   DownloadOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import { Table, Button, Space, Input, Popconfirm, Tag } from "antd";
+import { Table, Button, Space, Input, Popconfirm, Tag, Avatar } from "antd";
 import { useState } from "react";
 import { exportToExcel, importFromExcel } from "../utils/excel";
+
 
 function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
   const [searchText, setSearchText] = useState("");
@@ -41,6 +43,14 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
       width: 70,
     },
     {
+      title: "Avatar",
+      dataIndex: "avatar",
+      key: "avatar",
+
+      
+      render: (avatar) => <Avatar src={avatar} icon={<UserOutlined />} />,
+    },
+    {
       title: "Name",
       dataIndex: "name",
       key: "name",
@@ -48,7 +58,8 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
       onFilter: (value, record) => {
         return (
           record.name.toLowerCase().includes(value.toLowerCase()) ||
-          record.username.toLowerCase().includes(value.toLowerCase())
+          record.username.toLowerCase().includes(value.toLowerCase()) ||
+          record.email.toLowerCase().includes(value.toLowerCase())
         );
       },
       render: (text) => <strong>{text}</strong>,
@@ -67,14 +78,7 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
       width: 100,
       render: (userId) => <Tag color="blue"> User {userId}</Tag>,
     },
-    {
-      title: "Phone",
-      dataIndex: "phone",
-      key: "phone",
-      width: 200,
 
-      render: (text) => text,
-    },
     {
       title: "Email",
       dataIndex: "email",

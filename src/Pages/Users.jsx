@@ -57,12 +57,19 @@ function Users() {
       } else {
         ///User Yaratmag
         const response = await createUser({ ...values, userId: 1 });
-        setUsers([{ ...response.data, id: Date.now() }, ...users]);
-        message.success("Yazi elave edildi!");
+        // Avatar'ı da ekle
+        const newUser = { 
+          ...response.data, 
+          id: Date.now(),
+          avatar: values.avatar || null
+        };
+        setUsers([newUser, ...users]);
+        message.success("User Added");
       }
       setModalVisible(false);
     } catch (error) {
       console.log(error);
+      message.error("Error");
     }
   };
   return (
