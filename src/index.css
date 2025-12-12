@@ -6,30 +6,78 @@
   color: var(--text-color); /* Mətn rəngi */
 }
 
-/* Table Body Sətirləri */
-.ant-table-wrapper .dark-table-row > td {
-  background-color: #1e293b !important; /* Row fonu */
-  border-bottom: 1px solid #334155 !important; /* Sətirlər arasındakı xətt */
-  color: #f8fafc !important; /* Sətir mətn rəngi */
+/* Dark Mode - Table Background (Siyah Arka Plan) */
+.dark .ant-table-wrapper {
+  background-color: #1e293b !important;
 }
 
-/* Hover Stili */
-.ant-table-wrapper .dark-table-row:hover > td {
-  background-color: #334155 !important; 
+.dark .ant-table {
+  background-color: #1e293b !important;
+}
+
+.dark .ant-table-container {
+  background-color: #1e293b !important;
+}
+
+.dark .ant-table-content {
+  background-color: #1e293b !important;
+}
+
+.dark .ant-table-body {
+  background-color: #1e293b !important;
+}
+
+/* Dark Mode - Table Header */
+.dark .ant-table-thead > tr > th {
+  background-color: #1e293b !important;
+  border-bottom: 1px solid #333333 !important;
+  color: #ffffff !important;
+}
+
+/* Dark Mode - Table Body Rows */
+.dark .ant-table-tbody > tr > td {
+  background-color: #1e293b !important;
+  border-bottom: 1px solid #333333 !important;
+  color: #ffffff !important;
+}
+
+/* Dark Mode - Table Row Hover */
+.dark .ant-table-tbody > tr:hover > td {
+  background-color: #2b384d !important;
+}
+
+
+
+/* Dark Mode - Table Empty State */
+.dark .ant-empty {
+  color: #ffffff !important;
+}
+
+.dark .ant-empty-description {
+  color: #cccccc !important;
 }
 
 /* AntD Pagination (Səhifələmə) Elementlərini də Tündləşdirin */
-.ant-pagination-item-link,
-.ant-pagination-item {
-  background-color: #334155 !important;
-  border-color: #475569 !important;
-  color: #f8fafc !important;
+.dark .ant-pagination-item-link,
+.dark .ant-pagination-item {
+  background-color: #1e293b !important;
+  border-color: #333333 !important;
+  color: #ffffff !important;
 }
 
-.ant-pagination-item-active {
+.dark .ant-pagination-item-active {
+  background-color: #1e293b !important;
   border-color: #3b82f6 !important;
 }
 
-.ant-pagination-item-link .anticon {
-  color: #f8fafc !important;
+.dark .ant-pagination-item-active a {
+  color: #3b82f6 !important;
+}
+
+.dark .ant-pagination-item-link .anticon {
+  color: #ffffff !important;
+}
+
+.dark .ant-pagination-item a {
+  color: #ffffff !important;
 }

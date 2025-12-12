@@ -29,10 +29,9 @@ function Dashboard() {
   const isDark = theme === "dark";
   //Colors
   const colors = {
-    cardBg: isDark ? "#1e293b" : "#ffffff", // Koyu veya açık kart fonu
-    textColor: isDark ? "#f8fafc" : "#000000", // Koyu veya açık yazı rengi
-    statisticValueColor: isDark ? "#3b82f6" : "#1d4ed8", // Statistik dəyər rəngi
-    iconColor: isDark ? "#3b82f6" : "#1d4ed8",
+    cardBg: isDark ? "#1e293b" : "#ffffff",
+    textColor: isDark ? "#f8fafc" : "#000000", 
+    statisticValueColor: isDark ? "#3b82f6" : "#1d4ed8", 
   };
   //Trasnition
   const transitionStyle = { transition: "background-color 0.5s ease-in-out" };

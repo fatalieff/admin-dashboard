@@ -7,7 +7,6 @@ import {
   UserOutlined,
   FileTextOutlined,
   DashboardOutlined,
-  LoginOutlined,
   LogoutOutlined,
   MenuOutlined
 } from "@ant-design/icons";
@@ -155,7 +154,7 @@ function MainLayout() {
           >
             Admin Dashboard
           </h1>
-          <Dropdown menu={{ items: dropdownItems }} placement="bottomRight">
+          <Dropdown menu={{ items: dropdownItems }} placement="bottomRight" >
             <Space style={{ cursor: "pointer" }}>
               <span style={{fontSize:`25px` , color: colors.textColor }} ><MenuOutlined/></span>
             </Space>

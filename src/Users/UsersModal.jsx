@@ -132,6 +132,7 @@ function UserModal({visible, onSuccess, onCancel, user}) {
       
       cancelText="Cancel"
       width={600}
+      
     >
       <Form form={form} layout="vertical">
         <Form.Item

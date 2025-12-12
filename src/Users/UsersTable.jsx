@@ -1,5 +1,5 @@
 import React from "react";
-import Icon, {
+import {
   EditOutlined,
   DeleteOutlined,
   SearchOutlined,
@@ -107,7 +107,7 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
             okText="Delete"
             cancelText="Cancel"
           >
-            <Button danger icon={<DeleteOutlined />} size="small">
+            <Button color="red" icon={<DeleteOutlined />} size="small"  variant="solid">
               Delete
             </Button>
           </Popconfirm>
