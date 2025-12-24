@@ -40,13 +40,16 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      width: 70,
+      width: 60,
+      className: "small-mobile-hide",
     },
     {
       title: "Avatar",
       dataIndex: "avatar",
       key: "avatar",
-      render: (avatar) => <Avatar src={avatar} icon={<UserOutlined />} />,
+      width: 50,
+      render: (avatar) => <Avatar size="small" src={avatar} icon={<UserOutlined />} />,
+      className: "mobile-hide",
     },
     {
       title: "Name",
@@ -61,42 +64,49 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
         );
       },
       render: (text) => <strong>{text}</strong>,
+      minWidth: 120,
     },
     {
       title: "Username",
       dataIndex: "username",
       key: "username",
-
+      className: "mobile-hide",
+      minWidth: 100,
       render: (text) => text,
     },
     {
       title: "User ID",
       dataIndex: "userId",
       key: "userId",
-      width: 100,
-      render: (userId) => <Tag color="blue"> User {userId}</Tag>,
+      width: 80,
+      className: "small-mobile-hide",
+      render: (userId) => <Tag color="blue" size="small">U{userId}</Tag>,
     },
 
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-
-      render: (text) => text,
+      minWidth: 150,
+      render: (text) => {
+        const emailText = text || '';
+        return emailText.length > 20 ? `${emailText.substring(0, 20)}...` : emailText;
+      },
     },
     {
       title: "Actions",
       key: "actions",
-      width: 150,
+      width: 120,
+      fixed: 'right',
       render: (_, record) => (
-        <Space>
+        <Space size="small">
           <Button
             type="primary"
             icon={<EditOutlined />}
             onClick={() => onEdit(record)}
             size="small"
           >
-            Edit
+            <span className="small-mobile-hide">Edit</span>
           </Button>
 
           <Popconfirm
@@ -105,8 +115,14 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
             okText="Delete"
             cancelText="Cancel"
           >
-            <Button color="red" icon={<DeleteOutlined />} size="small"  variant="solid">
-              Delete
+            <Button 
+              danger 
+              icon={<DeleteOutlined />} 
+              size="small" 
+              variant="solid"
+              color="red"
+            >
+              <span className="small-mobile-hide">Delete</span>
             </Button>
           </Popconfirm>
         </Space>
@@ -129,7 +145,7 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
           value={searchText}
           prefix={<SearchOutlined />}
           onChange={(e) => setSearchText(e.target.value)}
-          style={{ marginBottom: "15px", width: "300px" }}
+          style={{ marginBottom: "15px", width: 250 }}
         />
 
         <div>
@@ -138,26 +154,37 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
             icon={<DownloadOutlined />}
             onClick={handleExport}
             style={{ marginRight: "10px" }}
+            className="mobile-hide"
           >
-            Export to Excel
+            <span className="small-mobile-hide">Export to Excel</span>
           </Button>
 
           <Button
             type="primary"
             icon={<UploadOutlined />}
             onClick={handleImport}
+            className="small-mobile-hide"
           >
-            Import from Excel
+            <span className="mobile-hide">Import from Excel</span>
           </Button>
         </div>
       </Space>
-      <Table
-        columns={userColumns}
-        pagination={{ pageSize: 10 }}
-        rowKey="id"
-        loading={loading}
-        dataSource={users}
-      />
+      <div className="responsive-table-container">
+        <Table
+          columns={userColumns}
+          pagination={{ 
+            pageSize: 10,
+            showSizeChanger: false,
+            showQuickJumper: false,
+            simple: true
+          }}
+          rowKey="id"
+          loading={loading}
+          dataSource={users}
+          scroll={{ x: 'max-content' }}
+          size="small"
+        />
+      </div>
     </div>
   );
 }

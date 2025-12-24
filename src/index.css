@@ -1,4 +1,219 @@
 @import "tailwindcss";
+
+/* Responsive Table Container */
+.responsive-table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-table-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.responsive-table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.responsive-table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.responsive-table-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark mode scrollbar */
+.dark .responsive-table-container::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+.dark .responsive-table-container::-webkit-scrollbar-thumb {
+  background: #4a5568;
+}
+
+.dark .responsive-table-container::-webkit-scrollbar-thumb:hover {
+  background: #718096;
+}
+
+/* Mobile-specific table styles */
+@media (max-width: 768px) {
+  .ant-table {
+    font-size: 12px !important;
+  }
+  
+  .ant-table-thead > tr > th {
+    padding: 8px 4px !important;
+    font-size: 11px !important;
+  }
+  
+  .ant-table-tbody > tr > td {
+    padding: 8px 4px !important;
+    font-size: 12px !important;
+  }
+  
+  .ant-btn-sm {
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+  }
+  
+  .ant-space-item {
+    font-size: 12px !important;
+  }
+  
+  /* Hide less important columns on mobile */
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .ant-table {
+    font-size: 11px !important;
+  }
+  
+  .ant-table-thead > tr > th {
+    padding: 6px 2px !important;
+    font-size: 10px !important;
+  }
+  
+  .ant-table-tbody > tr > td {
+    padding: 6px 2px !important;
+    font-size: 11px !important;
+  }
+  
+  .ant-btn-sm {
+    padding: 2px 6px !important;
+    font-size: 10px !important;
+  }
+  
+  /* Hide more columns on very small screens */
+  .small-mobile-hide {
+    display: none !important;
+  }
+}
+
+/* Sidebar Animations */
+.sidebar-animation {
+  animation: slideIn 0.3s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+.sidebar-animation.ant-layout-sider-collapsed {
+  animation: slideOut 0.3s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Menu Item Hover Animations */
+.sidebar-menu .ant-menu-item {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+  overflow: hidden;
+}
+
+.sidebar-menu .ant-menu-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.sidebar-menu .ant-menu-item:hover::before {
+  left: 100%;
+}
+
+.sidebar-menu .ant-menu-item:hover {
+  transform: translateX(4px);
+  border-radius: 0 8px 8px 0;
+}
+
+.sidebar-menu .ant-menu-item-selected {
+  transform: translateX(4px);
+  border-radius: 0 8px 8px 0;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), transparent) !important;
+}
+
+.sidebar-menu .ant-menu-item-selected::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: #3b82f6;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Mobile Sidebar Animation */
+@media (max-width: 992px) {
+  .sidebar-animation {
+    position: fixed !important;
+    height: 100vh !important;
+    z-index: 1001 !important;
+  }
+  
+  .sidebar-animation.ant-layout-sider-collapsed {
+    transform: translateX(-100%);
+  }
+}
+
+/* Theme Transition Animation */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Header Button Animation */
+header button {
+  position: relative;
+  overflow: hidden;
+}
+
+header button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+header button:hover::after {
+  width: 100px;
+  height: 100px;
+}
+
 /* index.css (və ya global stil faylınızda) */
 
 /* Dark Mod üçün Table Stilini Hədəfləyirik */

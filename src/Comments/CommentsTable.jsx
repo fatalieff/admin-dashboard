@@ -14,21 +14,29 @@ function CommentsTable({ comments, loading, onEdit, onDelete }) {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      width: 70,
+      width: 60,
+      className: "small-mobile-hide",
     },
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
-
-      render: (text) => text,
+      className: "mobile-hide",
+      minWidth: 100,
+      render: (text) => {
+        const nameText = text || '';
+        return nameText.length > 15 ? `${nameText.substring(0, 15)}...` : nameText;
+      },
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-
-      render: (text) => text,
+      minWidth: 120,
+      render: (text) => {
+        const emailText = text || '';
+        return emailText.length > 20 ? `${emailText.substring(0, 20)}...` : emailText;
+      },
     },
     {
       title: "Comments",
@@ -42,21 +50,26 @@ function CommentsTable({ comments, loading, onEdit, onDelete }) {
           record.email?.toLowerCase().includes(value.toLowerCase())
         );
       },
-      render: (text) => <strong>{text}</strong>,
+      minWidth: 150,
+      render: (text) => {
+        const bodyText = text || '';
+        return <strong>{bodyText.length > 40 ? `${bodyText.substring(0, 40)}...` : bodyText}</strong>;
+      },
     },
     {
       title: "Actions",
       key: "actions",
-      width: 150,
+      width: 120,
+      fixed: 'right',
       render: (_, record) => (
-        <Space>
+        <Space size="small">
           <Button
             type="primary"
             icon={<EditOutlined />}
             onClick={() => onEdit(record)}
             size="small"
           >
-            Edit
+            <span className="small-mobile-hide">Edit</span>
           </Button>
 
           <Popconfirm
@@ -72,7 +85,7 @@ function CommentsTable({ comments, loading, onEdit, onDelete }) {
               variant="solid"
               color="red"
             >
-              Delete
+              <span className="small-mobile-hide">Delete</span>
             </Button>
           </Popconfirm>
         </Space>
@@ -93,16 +106,25 @@ function CommentsTable({ comments, loading, onEdit, onDelete }) {
           prefix={<SearchOutlined />}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          style={{ marginBottom: "15px", width: "300px" }}
+          style={{ marginBottom: "15px", width: 250 }}
         />
 
-        <Table
-          columns={commentsColumn}
-          dataSource={comments}
-          loading={loading}
-          rowKey="id"
-          pagination={{ pageSize: 10 }}
-        />
+        <div className="responsive-table-container">
+          <Table
+            columns={commentsColumn}
+            dataSource={comments}
+            loading={loading}
+            rowKey="id"
+            pagination={{ 
+              pageSize: 10,
+              showSizeChanger: false,
+              showQuickJumper: false,
+              simple: true
+            }}
+            scroll={{ x: 'max-content' }}
+            size="small"
+          />
+        </div>
       </div>
     </div>
   );

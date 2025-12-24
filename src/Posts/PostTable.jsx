@@ -15,7 +15,8 @@ function PostTable({ posts, loading, onEdit, onDelete }) {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      width: 70,
+      width: 60,
+      className: "small-mobile-hide",
     },
 
     {
@@ -29,35 +30,45 @@ function PostTable({ posts, loading, onEdit, onDelete }) {
           record.body.toLowerCase().includes(value.toLowerCase())
         );
       },
-      render: (text) => <strong>{text}</strong>,
+      render: (text) => {
+        const titleText = text || '';
+        return <strong>{titleText.length > 30 ? `${titleText.substring(0, 30)}...` : titleText}</strong>;
+      },
+      minWidth: 150,
     },
     {
       title: "Content",
       dataIndex: "body",
       key: "body",
-
-      render: (text) => text.substring(0, 100) + "....",
+      className: "mobile-hide",
+      minWidth: 200,
+      render: (text) => {
+        const bodyText = text || '';
+        return bodyText.length > 50 ? `${bodyText.substring(0, 50)}...` : bodyText;
+      },
     },
     {
       title: "User ID",
       dataIndex: "userId",
       key: "userId",
-      width: 100,
-      render: (userId) => <Tag color="blue"> User {userId}</Tag>,
+      width: 80,
+      className: "small-mobile-hide",
+      render: (userId) => <Tag color="blue" size="small">U{userId}</Tag>,
     },
     {
       title: "Actions",
       key: "actions",
-      width: 150,
+      width: 120,
+      fixed: 'right',
       render: (_, record) => (
-        <Space>
+        <Space size="small">
           <Button
             type="primary"
             icon={<EditOutlined />}
             onClick={() => onEdit(record)}
             size="small"
           >
-            Edit
+            <span className="small-mobile-hide">Edit</span>
           </Button>
 
           <Popconfirm
@@ -67,7 +78,7 @@ function PostTable({ posts, loading, onEdit, onDelete }) {
             cancelText="Cancel"
           >
             <Button danger icon={<DeleteOutlined />} size="small" variant="solid" color="red">
-              Delete
+              <span className="small-mobile-hide">Delete</span>
             </Button>
           </Popconfirm>
         </Space>
@@ -86,16 +97,25 @@ function PostTable({ posts, loading, onEdit, onDelete }) {
         prefix={<SearchOutlined />}
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
-        style={{ marginBottom: "15px", width: "300px" }}
+        style={{ marginBottom: "15px", width: 250 }}
       />
 
-      <Table
-        columns={columns}
-        dataSource={posts}
-        loading={loading}
-        rowKey="id"
-        pagination={{ pageSize: 10 }}
-      />
+      <div className="responsive-table-container">
+        <Table
+          columns={columns}
+          dataSource={posts}
+          loading={loading}
+          rowKey="id"
+          pagination={{ 
+            pageSize: 10,
+            showSizeChanger: false,
+            showQuickJumper: false,
+            simple: true
+          }}
+          scroll={{ x: 'max-content' }}
+          size="small"
+        />
+      </div>
     </div>
   );
 }

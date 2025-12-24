@@ -1,5 +1,5 @@
 import { Layout, Menu, Dropdown, Space } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { logout } from "../Services/auth";
 import { useTheme } from "../contexts/ThemeContext";
 import ThemeSwitch from "../Components/ThemeSwitch";
@@ -10,6 +10,8 @@ import {
   LogoutOutlined,
   MenuOutlined,
   CommentOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
 } from "@ant-design/icons";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 
@@ -18,9 +20,10 @@ const { Header, Sider, Content } = Layout;
 function MainLayout() {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
   const isDark = theme === "dark";
   const transitionStyle = {
-    transition: "background-color 0.5s ease, color 0.5s ease",
+    transition: "all 0.3s cubic-bezier(0.2, 0, 0, 1) 0s",
   };
   //Theme Colors
   const colors = {
@@ -72,11 +75,11 @@ function MainLayout() {
   const menuItems = [
     {
       key: "1",
-      icon: <DashboardOutlined style={{ color: colors.menuItemColor }} />,
+      icon: <DashboardOutlined style={{ color: colors.menuItemColor, fontSize: "16px", transition: "all 0.3s" }} />,
       label: (
         <Link to="/">
           <span
-            className="text-[#fff] text-[16px] font-[500] "
+            className="text-[16px] font-[500] hover:text-blue-500 transition-colors duration-300"
             style={{ color: colors.textColor }}
           >
             Dashboard
@@ -86,11 +89,11 @@ function MainLayout() {
     },
     {
       key: "2",
-      icon: <UserOutlined style={{ color: colors.menuItemColor }} />,
+      icon: <UserOutlined style={{ color: colors.menuItemColor, fontSize: "16px", transition: "all 0.3s" }} />,
       label: (
         <Link to="/users">
           <span
-            className="text-[#fff] text-[16px] font-[500] "
+            className="text-[16px] font-[500] hover:text-blue-500 transition-colors duration-300"
             style={{ color: colors.textColor }}
           >
             Users
@@ -100,11 +103,11 @@ function MainLayout() {
     },
     {
       key: "3",
-      icon: <FileTextOutlined style={{ color: colors.menuItemColor }} />,
+      icon: <FileTextOutlined style={{ color: colors.menuItemColor, fontSize: "16px", transition: "all 0.3s" }} />,
       label: (
         <Link to="/posts">
           <span
-            className="text-[#fff] text-[16px] font-[500] "
+            className="text-[16px] font-[500] hover:text-blue-500 transition-colors duration-300"
             style={{ color: colors.textColor }}
           >
             Posts
@@ -114,11 +117,11 @@ function MainLayout() {
     },
     {
       key: "4",
-      icon: <CommentOutlined style={{ color: colors.menuItemColor }} />,
+      icon: <CommentOutlined style={{ color: colors.menuItemColor, fontSize: "16px", transition: "all 0.3s" }} />,
       label: (
         <Link to="/comments">
           <span
-            className="text-[#fff] text-[16px] font-[500] "
+            className="text-[16px] font-[500] hover:text-blue-500 transition-colors duration-300"
             style={{ color: colors.textColor }}
           >
             Comments
@@ -130,24 +133,43 @@ function MainLayout() {
   return (
     <Layout style={{ minHeight: "100vh", backgroundColor: colors.appLayoutBg }}>
       <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={setCollapsed}
         breakpoint="lg"
         collapsedWidth="0"
-        style={{ background: colors.siderBg, ...transitionStyle }}
+        trigger={null}
+        style={{ 
+          background: colors.siderBg, 
+          ...transitionStyle,
+          boxShadow: collapsed ? "none" : "2px 0 8px rgba(0,0,0,0.15)",
+          position: "relative",
+          zIndex: 1000
+        }}
+        className="sidebar-animation"
       >
         <div
           style={{
             height: "70px",
-
             margin: "15px",
-
-            fontSize: "20px",
+            fontSize: collapsed ? "16px" : "20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: collapsed ? "center" : "flex-start",
+            transition: "all 0.3s cubic-bezier(0.2, 0, 0, 1) 0s",
           }}
         >
           <p
-            className="text-center text-2xl text-[#fff] font-bold"
-            style={{ color: colors.textColor, ...transitionStyle }}
+            className="font-bold"
+            style={{ 
+              color: colors.textColor, 
+              ...transitionStyle,
+              whiteSpace: collapsed ? "nowrap" : "normal",
+              overflow: "hidden",
+              textOverflow: "ellipsis"
+            }}
           >
-            Admin Panel
+            {collapsed ? "A" : "Admin Panel"}
           </p>
         </div>
         <Menu
@@ -155,20 +177,45 @@ function MainLayout() {
           mode="inline"
           defaultSelectedKeys={["1"]}
           items={menuItems}
-          style={{ ...transitionStyle }}
+          style={{ 
+            ...transitionStyle,
+            borderRight: "none"
+          }}
+          className="sidebar-menu"
         />
       </Sider>
       <Layout>
         <Header
           style={{ background: colors.headerBg, ...transitionStyle }}
-          className="flex justify-between"
+          className="flex justify-between items-center px-4"
         >
-          <h1
-            className=" text-center text-[#000] font-bold sm:text-[15px] md:text-[25px] lg:text-[30px]  "
-            style={{ color: colors.textColor, ...transitionStyle }}
-          >
-            Admin Dashboard
-          </h1>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "18px",
+                color: colors.textColor,
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: "8px",
+                borderRadius: "6px",
+                transition: "all 0.3s",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+              className="hover:bg-gray-200 dark:hover:bg-gray-700"
+            >
+              {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            </button>
+            <h1
+              className="font-bold sm:text-[15px] md:text-[25px] lg:text-[30px]"
+              style={{ color: colors.textColor, ...transitionStyle }}
+            >
+              Admin Dashboard
+            </h1>
+          </div>
           <Dropdown
             menu={{ items: dropdownItems }}
             placement="bottomRight"
@@ -184,13 +231,14 @@ function MainLayout() {
 
         <Content
           style={{
-            margin: "24px 20px",
-            padding: "24px",
-            borderRadius: `40px`,
+            margin: "16px 12px",
+            padding: "16px",
+            borderRadius: `12px`,
             background: colors.contentBg,
             ...transitionStyle,
             color: colors.textColor,
-            ...transitionStyle,
+            overflow: 'hidden',
+            minHeight: 'calc(100vh - 120px)'
           }}
         >
           <Outlet />
