@@ -8,7 +8,8 @@ import {
   FileTextOutlined,
   DashboardOutlined,
   LogoutOutlined,
-  MenuOutlined
+  MenuOutlined,
+  CommentOutlined,
 } from "@ant-design/icons";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 
@@ -111,6 +112,20 @@ function MainLayout() {
         </Link>
       ),
     },
+    {
+      key: "4",
+      icon: <CommentOutlined style={{ color: colors.menuItemColor }} />,
+      label: (
+        <Link to="/comments">
+          <span
+            className="text-[#fff] text-[16px] font-[500] "
+            style={{ color: colors.textColor }}
+          >
+            Comments
+          </span>
+        </Link>
+      ),
+    },
   ];
   return (
     <Layout style={{ minHeight: "100vh", backgroundColor: colors.appLayoutBg }}>
@@ -154,25 +169,31 @@ function MainLayout() {
           >
             Admin Dashboard
           </h1>
-          <Dropdown menu={{ items: dropdownItems }} placement="bottomRight" >
+          <Dropdown
+            menu={{ items: dropdownItems }}
+            placement="bottomRight"
+            trigger={["click"]}
+          >
             <Space style={{ cursor: "pointer" }}>
-              <span style={{fontSize:`25px` , color: colors.textColor }} ><MenuOutlined/></span>
+              <span style={{ fontSize: `25px`, color: colors.textColor }}>
+                <MenuOutlined />
+              </span>
             </Space>
           </Dropdown>
         </Header>
 
         <Content
           style={{
-            margin: "24px 16px",
+            margin: "24px 20px",
             padding: "24px",
-            borderRadius: `15px`,
+            borderRadius: `40px`,
             background: colors.contentBg,
             ...transitionStyle,
             color: colors.textColor,
             ...transitionStyle,
           }}
         >
-          <Outlet style={{ backgroundColor: colors.appLayoutBg }} />
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

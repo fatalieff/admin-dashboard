@@ -4,27 +4,33 @@
 /* Dark Mod üçün Table Stilini Hədəfləyirik */
 .ant-table-wrapper {
   color: var(--text-color); /* Mətn rəngi */
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 /* Dark Mode - Table Background (Siyah Arka Plan) */
 .dark .ant-table-wrapper {
   background-color: #1e293b !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-table {
   background-color: #1e293b !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-table-container {
   background-color: #1e293b !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-table-content {
   background-color: #1e293b !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-table-body {
   background-color: #1e293b !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 /* Dark Mode - Table Header */
@@ -32,6 +38,7 @@
   background-color: #1e293b !important;
   border-bottom: 1px solid #333333 !important;
   color: #ffffff !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 /* Dark Mode - Table Body Rows */
@@ -39,11 +46,13 @@
   background-color: #1e293b !important;
   border-bottom: 1px solid #333333 !important;
   color: #ffffff !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 /* Dark Mode - Table Row Hover */
 .dark .ant-table-tbody > tr:hover > td {
   background-color: #2b384d !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 
@@ -51,33 +60,40 @@
 /* Dark Mode - Table Empty State */
 .dark .ant-empty {
   color: #ffffff !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-empty-description {
   color: #cccccc !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
-/* AntD Pagination (Səhifələmə) Elementlərini də Tündləşdirin */
+/* AntD Pagination */
 .dark .ant-pagination-item-link,
 .dark .ant-pagination-item {
   background-color: #1e293b !important;
   border-color: #333333 !important;
   color: #ffffff !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-pagination-item-active {
   background-color: #1e293b !important;
   border-color: #3b82f6 !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-pagination-item-active a {
   color: #3b82f6 !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-pagination-item-link .anticon {
   color: #ffffff !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }
 
 .dark .ant-pagination-item a {
   color: #ffffff !important;
+  transition: "background-color 0.5s ease, color 0.5s ease",
 }

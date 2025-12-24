@@ -14,7 +14,7 @@ import { exportToExcel, importFromExcel } from "../utils/excel";
 
 function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
   const [searchText, setSearchText] = useState("");
-
+//Excel
   const handleExport = () => {
     exportToExcel(users, "UserList");
   };
@@ -34,7 +34,7 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
       );
     }
   };
-
+//Table 
   const userColumns = [
     {
       title: "ID",
@@ -46,8 +46,6 @@ function UsersTable({ onDelete, onEdit, loading, users, onImport }) {
       title: "Avatar",
       dataIndex: "avatar",
       key: "avatar",
-
-      
       render: (avatar) => <Avatar src={avatar} icon={<UserOutlined />} />,
     },
     {

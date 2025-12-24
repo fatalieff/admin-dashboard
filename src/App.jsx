@@ -7,6 +7,7 @@ import { isAuthenticated } from "./Services/auth.js";
 import Users from "./Pages/Users.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Comments from "./Pages/Comments.jsx";
 function App() {
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="users" element={<Users />} />
             <Route path="posts" element={<Posts />} />
+            <Route path="comments" element={<Comments />} />
           </Route>
         </Routes>
       </BrowserRouter>

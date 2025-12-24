@@ -8,12 +8,12 @@ import UsersTable from "../Users/UsersTable";
 import UsersModal from "../Users/UsersModal";
 
 function Users() {
-  //Usestateler
+  //User States
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
-  //Data Cekmek
+  //Data Fetching
   const loadUsers = async () => {
     setLoading(true);
     try {
@@ -55,9 +55,9 @@ function Users() {
           )
         );
       } else {
-        ///User Yaratmag
+        ///Create User
         const response = await createUser({ ...values, userId: 1 });
-        // Avatar'ı da ekle
+        // Avatar
         const newUser = { 
           ...response.data, 
           id: Date.now(),
@@ -73,7 +73,7 @@ function Users() {
     }
   };
   return (
-    <div>
+    <div className="">
       <div
         style={{
           marginBottom: "16px",

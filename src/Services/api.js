@@ -20,4 +20,10 @@ export const createPost = (post) => api.post("/posts", post);
 export const updatePost = (id, post) => api.put(`/posts/${id}`, post);
 export const deletePost = (id) => api.delete(`/posts/${id}`);
 
+export const getComments = () => api.get("/comments");
+export const getCommentById = (id) => api.get(`/comments/${id}`);
+export const createComment = (comment) => api.post("/comments", comment);
+export const uptadeComment = (id, comment) => api.put(`/comments/${id}`, comment);
+export const deleteComment = (id) => api.delete(`/comments/${id}`);
+
 export default api;
