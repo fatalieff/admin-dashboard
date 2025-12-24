@@ -181,8 +181,25 @@
   }
   
   .sidebar-animation.ant-layout-sider-collapsed {
-    transform: translateX(-100%);
+    transform: translateX(-100%) !important;
   }
+  
+  /* Ensure content doesn't shift when sidebar is open on mobile */
+  .ant-layout {
+    margin-left: 0 !important;
+  }
+}
+
+/* Mobile overlay backdrop blur effect */
+.mobile-overlay {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Touch-friendly close button */
+.mobile-close-btn {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Theme Transition Animation */

@@ -1,5 +1,5 @@
 import { Layout, Menu, Dropdown, Space } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { logout } from "../Services/auth";
 import { useTheme } from "../contexts/ThemeContext";
 import ThemeSwitch from "../Components/ThemeSwitch";
@@ -12,6 +12,7 @@ import {
   CommentOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 
@@ -21,9 +22,31 @@ function MainLayout() {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const isDark = theme === "dark";
   const transitionStyle = {
     transition: "all 0.3s cubic-bezier(0.2, 0, 0, 1) 0s",
+  };
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+      if (window.innerWidth >= 992) {
+        setCollapsed(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Handle sidebar close on mobile
+  const handleSidebarClose = () => {
+    if (isMobile) {
+      setCollapsed(true);
+    }
   };
   //Theme Colors
   const colors = {
@@ -77,7 +100,7 @@ function MainLayout() {
       key: "1",
       icon: <DashboardOutlined style={{ color: colors.menuItemColor, fontSize: "16px", transition: "all 0.3s" }} />,
       label: (
-        <Link to="/">
+        <Link to="/" onClick={handleSidebarClose}>
           <span
             className="text-[16px] font-[500] hover:text-blue-500 transition-colors duration-300"
             style={{ color: colors.textColor }}
@@ -91,7 +114,7 @@ function MainLayout() {
       key: "2",
       icon: <UserOutlined style={{ color: colors.menuItemColor, fontSize: "16px", transition: "all 0.3s" }} />,
       label: (
-        <Link to="/users">
+        <Link to="/users" onClick={handleSidebarClose}>
           <span
             className="text-[16px] font-[500] hover:text-blue-500 transition-colors duration-300"
             style={{ color: colors.textColor }}
@@ -105,7 +128,7 @@ function MainLayout() {
       key: "3",
       icon: <FileTextOutlined style={{ color: colors.menuItemColor, fontSize: "16px", transition: "all 0.3s" }} />,
       label: (
-        <Link to="/posts">
+        <Link to="/posts" onClick={handleSidebarClose}>
           <span
             className="text-[16px] font-[500] hover:text-blue-500 transition-colors duration-300"
             style={{ color: colors.textColor }}
@@ -119,7 +142,7 @@ function MainLayout() {
       key: "4",
       icon: <CommentOutlined style={{ color: colors.menuItemColor, fontSize: "16px", transition: "all 0.3s" }} />,
       label: (
-        <Link to="/comments">
+        <Link to="/comments" onClick={handleSidebarClose}>
           <span
             className="text-[16px] font-[500] hover:text-blue-500 transition-colors duration-300"
             style={{ color: colors.textColor }}
@@ -132,6 +155,23 @@ function MainLayout() {
   ];
   return (
     <Layout style={{ minHeight: "100vh", backgroundColor: colors.appLayoutBg }}>
+      {/* Mobile Overlay */}
+      {isMobile && !collapsed && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 999,
+            transition: 'opacity 0.3s ease'
+          }}
+          onClick={handleSidebarClose}
+        />
+      )}
+      
       <Sider
         collapsible
         collapsed={collapsed}
@@ -143,11 +183,39 @@ function MainLayout() {
           background: colors.siderBg, 
           ...transitionStyle,
           boxShadow: collapsed ? "none" : "2px 0 8px rgba(0,0,0,0.15)",
-          position: "relative",
-          zIndex: 1000
+          position: isMobile ? "fixed" : "relative",
+          zIndex: 1000,
+          height: isMobile ? "100vh" : "auto",
+          left: 0,
+          top: 0
         }}
         className="sidebar-animation"
       >
+        {/* Mobile Close Button */}
+        {isMobile && !collapsed && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              zIndex: 1001,
+              cursor: 'pointer'
+            }}
+            onClick={handleSidebarClose}
+          >
+            <CloseOutlined 
+              style={{ 
+                fontSize: '18px', 
+                color: colors.textColor,
+                padding: '8px',
+                borderRadius: '4px',
+                transition: 'all 0.3s'
+              }}
+              className="hover:bg-gray-200 dark:hover:bg-gray-700"
+            />
+          </div>
+        )}
+        
         <div
           style={{
             height: "70px",
@@ -157,6 +225,7 @@ function MainLayout() {
             alignItems: "center",
             justifyContent: collapsed ? "center" : "flex-start",
             transition: "all 0.3s cubic-bezier(0.2, 0, 0, 1) 0s",
+            paddingRight: isMobile && !collapsed ? "40px" : "0"
           }}
         >
           <p
@@ -191,7 +260,7 @@ function MainLayout() {
         >
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setCollapsed(!collapsed)}
+              onClick={() => isMobile ? setCollapsed(!collapsed) : setCollapsed(!collapsed)}
               style={{
                 fontSize: "18px",
                 color: colors.textColor,
@@ -207,7 +276,7 @@ function MainLayout() {
               }}
               className="hover:bg-gray-200 dark:hover:bg-gray-700"
             >
-              {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              {isMobile ? <MenuOutlined /> : (collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />)}
             </button>
             <h1
               className="font-bold sm:text-[15px] md:text-[25px] lg:text-[30px]"
